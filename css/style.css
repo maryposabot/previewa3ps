@@ -968,7 +968,7 @@ input, textarea, select {
 
 .industry-services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-6);
 }
 
@@ -1012,7 +1012,7 @@ input, textarea, select {
   font-size: var(--text-sm);
   color: var(--c-gray-600);
   line-height: 1.65;
-  margin-top: auto;
+  margin-bottom: var(--sp-2);
 }
 
 /* -------------------------------------------------------
@@ -1950,6 +1950,10 @@ footer {
   .about-body {
     grid-template-columns: 1fr;
     gap: var(--sp-10);
+  }
+
+  .industry-services-grid {
+    grid-template-columns: 1fr;
   }
 
   .consulting-grid {
