@@ -158,6 +158,15 @@ input, textarea, select {
   border: 0;
 }
 
+:focus-visible {
+  outline: 2px solid var(--c-red);
+  outline-offset: 3px;
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--header-h) + var(--sp-4));
+}
+
 /* -------------------------------------------------------
    03. ANIMAÇÕES DE SCROLL ([data-animate])
    ------------------------------------------------------- */
@@ -171,6 +180,21 @@ input, textarea, select {
 [data-animate].is-visible {
   opacity: 1;
   transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* -------------------------------------------------------
@@ -958,7 +982,7 @@ input, textarea, select {
 }
 
 /* -------------------------------------------------------
-   10. SEÇÃO — SOLUÇÕES PARA A INDÚSTRIA (#solucoes)
+   10. SEÇÃO — SERVIÇOS (#servicos)
    ------------------------------------------------------- */
 .solutions-industry {
   background: var(--c-off-white);
@@ -981,6 +1005,7 @@ input, textarea, select {
   flex-direction: column;
   transition: transform var(--dur-med), box-shadow var(--dur-med), border-color var(--dur-med);
   position: relative;
+  height: 100%;
 }
 
 .industry-card:hover {
@@ -989,13 +1014,40 @@ input, textarea, select {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
+.industry-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4);
+}
+
 .industry-card-num {
   font-family: var(--font-heading);
   font-size: 2.25rem;
   font-weight: var(--fw-black);
   color: var(--c-red);
   line-height: 1;
-  margin-bottom: var(--sp-3);
+  margin-bottom: 0;
+}
+
+.industry-card-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-off-white);
+  border: 1px solid var(--c-gray-200);
+  border-radius: 4px;
+  color: var(--c-dark);
+  transition: all var(--dur-med);
+  flex-shrink: 0;
+}
+
+.industry-card:hover .industry-card-icon {
+  background: var(--c-dark);
+  color: var(--c-white);
+  border-color: var(--c-dark);
 }
 
 .industry-card-title {
@@ -1012,337 +1064,12 @@ input, textarea, select {
   font-size: var(--text-sm);
   color: var(--c-gray-600);
   line-height: 1.65;
-  margin-bottom: var(--sp-2);
-}
-
-/* -------------------------------------------------------
-   11. SEÇÃO — CONSULTORIA E MELHORIA (#consultoria)
-   ------------------------------------------------------- */
-.consulting-section {
-  background: var(--c-dark);
-  color: var(--c-white);
-  padding: var(--sp-24) 0;
-  border-top: 1px solid var(--c-dark-3);
-}
-
-.consulting-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--sp-6);
-}
-
-.consulting-card {
-  background: var(--c-dark-2);
-  border: 1px solid var(--c-dark-3);
-  padding: var(--sp-8);
-  display: flex;
-  flex-direction: column;
-  transition: all var(--dur-med);
-  position: relative;
-}
-
-.consulting-card:hover {
-  background: var(--c-dark-4);
-  border-color: var(--c-red);
-}
-
-.consulting-card-header {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
   margin-bottom: var(--sp-4);
 }
 
-.consulting-marker {
-  width: 8px;
-  height: 8px;
-  background: var(--c-red);
-}
 
-.consulting-card-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-white);
-  letter-spacing: 0.02em;
-}
 
-.consulting-card-desc {
-  font-size: var(--text-sm);
-  color: var(--c-gray-300);
-  line-height: 1.7;
-}
 
-/* -------------------------------------------------------
-   12. SEÇÃO — COMO TRABALHAMOS (#como-trabalhamos)
-   ------------------------------------------------------- */
-.how-it-works {
-  background: var(--c-black);
-  padding: var(--sp-24) 0;
-  border-top: 1px solid var(--c-dark-3);
-}
-
-#steps-list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
-  margin-top: var(--sp-12);
-  position: relative;
-  width: 100%;
-}
-
-#steps-list::before {
-  content: '';
-  position: absolute;
-  top: 24px;
-  left: calc(100% / 10);
-  right: calc(100% / 10);
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--c-dark-3) 20%, var(--c-dark-3) 80%, transparent);
-}
-
-.step-item {
-  padding: var(--sp-8) var(--sp-6);
-  border-right: 1px solid var(--c-dark-3);
-}
-
-.step-item:last-child {
-  border-right: none;
-}
-
-.step-num {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: var(--fw-bold);
-  color: var(--c-red);
-  letter-spacing: 0.1em;
-  margin-bottom: var(--sp-5);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 1.5px solid var(--c-dark-3);
-  background: var(--c-dark-2);
-}
-
-.step-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-white);
-  letter-spacing: 0.03em;
-  margin-bottom: var(--sp-3);
-}
-
-.step-desc {
-  font-size: var(--text-sm);
-  color: var(--c-gray-400);
-  line-height: 1.65;
-}
-
-/* -------------------------------------------------------
-   13. SEÇÃO — PERÍCIAS E ASSISTÊNCIA TÉCNICA (#pericias)
-   ------------------------------------------------------- */
-.pericias-section {
-  background: var(--c-white);
-  padding: var(--sp-24) 0;
-  border-top: 1px solid var(--c-gray-100);
-}
-
-.pericias-sub-block {
-  margin-bottom: var(--sp-12);
-}
-
-.pericias-sub-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-dark);
-  margin-bottom: var(--sp-6);
-  padding-bottom: var(--sp-3);
-  border-bottom: 2px solid var(--c-red);
-  display: inline-block;
-}
-
-.pericias-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--sp-6);
-}
-
-.pericia-card {
-  background: var(--c-off-white);
-  border: 1px solid var(--c-gray-200);
-  padding: var(--sp-6);
-  transition: transform var(--dur-med), border-color var(--dur-med);
-}
-
-.pericia-card:hover {
-  border-color: var(--c-red);
-  transform: translateY(-3px);
-}
-
-.pericia-card-name {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-dark);
-  margin-bottom: var(--sp-3);
-}
-
-.pericia-card-desc {
-  font-size: var(--text-sm);
-  color: var(--c-gray-600);
-  line-height: 1.65;
-}
-
-.pericias-action-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--c-dark);
-  color: var(--c-white);
-  padding: var(--sp-8);
-  margin-top: var(--sp-8);
-  flex-wrap: wrap;
-  gap: var(--sp-6);
-}
-
-.pericias-action-text {
-  font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 600px;
-}
-
-/* -------------------------------------------------------
-   14. SEÇÃO — FABRICANTES (#fabricantes)
-   ------------------------------------------------------- */
-.fabricantes-section {
-  background: var(--c-dark);
-  color: var(--c-white);
-  padding: var(--sp-24) 0;
-  border-top: 1px solid var(--c-dark-3);
-}
-
-.fabricantes-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: var(--sp-12);
-  align-items: start;
-}
-
-.fabricantes-box {
-  background: var(--c-dark-2);
-  border: 1px solid var(--c-dark-3);
-  padding: var(--sp-8);
-}
-
-.fabricantes-box-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-white);
-  margin-bottom: var(--sp-6);
-  padding-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--c-dark-4);
-}
-
-.fabricantes-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-4);
-}
-
-.fabricantes-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
-  font-size: var(--text-sm);
-  color: var(--c-gray-300);
-}
-
-.fabricantes-icon {
-  color: var(--c-red);
-  font-weight: var(--fw-bold);
-  line-height: 1.4;
-  flex-shrink: 0;
-}
-
-.fabricantes-publics-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-4);
-}
-
-.fabricantes-public-card {
-  background: var(--c-dark);
-  border: 1px solid var(--c-dark-4);
-  padding: var(--sp-5);
-  border-left: 3px solid var(--c-red);
-}
-
-.fabricantes-public-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-white);
-  margin-bottom: var(--sp-1);
-}
-
-.fabricantes-public-desc {
-  font-size: var(--text-xs);
-  color: var(--c-gray-400);
-  line-height: 1.6;
-}
-
-.fabricantes-action {
-  margin-top: var(--sp-8);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-4);
-  flex-wrap: wrap;
-}
-
-/* -------------------------------------------------------
-   15. SEÇÃO — MRO (#mro)
-   ------------------------------------------------------- */
-.mro-section {
-  background: var(--c-off-white);
-  padding: var(--sp-24) 0;
-  border-top: 1px solid var(--c-gray-100);
-}
-
-.mro-intro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--sp-8);
-  margin-bottom: var(--sp-10);
-}
-
-.mro-how-we-supply {
-  background: var(--c-white);
-  border: 1px solid var(--c-gray-200);
-  padding: var(--sp-8);
-}
-
-.mro-sub-heading {
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-dark);
-  margin-bottom: var(--sp-4);
-  padding-bottom: var(--sp-2);
-  border-bottom: 2px solid var(--c-red);
-  display: inline-block;
-}
 
 .mro-supply-list {
   display: flex;
@@ -1364,67 +1091,6 @@ input, textarea, select {
   background: var(--c-red);
   margin-top: 6px;
   flex-shrink: 0;
-}
-
-.mro-callout-quote {
-  background: var(--c-black);
-  color: var(--c-white);
-  border-left: 4px solid var(--c-red);
-  padding: var(--sp-8);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.mro-callout-title {
-  font-size: var(--text-xs);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--c-red);
-  font-weight: var(--fw-bold);
-  margin-bottom: var(--sp-3);
-}
-
-.mro-callout-text {
-  font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.65;
-  font-weight: var(--fw-medium);
-}
-
-.mro-lines-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--sp-6);
-}
-
-.mro-line-card {
-  background: var(--c-white);
-  border: 1px solid var(--c-gray-200);
-  border-top: 2px solid var(--c-dark);
-  padding: var(--sp-6);
-  transition: all var(--dur-med);
-}
-
-.mro-line-card:hover {
-  border-top-color: var(--c-red);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
-.mro-line-name {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-dark);
-  margin-bottom: var(--sp-2);
-}
-
-.mro-line-products {
-  font-size: var(--text-sm);
-  color: var(--c-gray-600);
-  line-height: 1.6;
 }
 
 .mro-bottom-cta {
@@ -1531,53 +1197,7 @@ input, textarea, select {
   line-height: 1.7;
 }
 
-/* -------------------------------------------------------
-   17. SEÇÃO — QUEM PODE CONTAR COM A A&L (#publico)
-   ------------------------------------------------------- */
-.public-section {
-  background: var(--c-dark);
-  color: var(--c-white);
-  padding: var(--sp-24) 0;
-  border-top: 1px solid var(--c-dark-3);
-}
 
-.public-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--sp-5);
-}
-
-.public-card {
-  background: var(--c-dark-2);
-  border: 1px solid var(--c-dark-3);
-  padding: var(--sp-6);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-4);
-  transition: all var(--dur-med);
-}
-
-.public-card:hover {
-  background: var(--c-dark-4);
-  border-color: var(--c-red);
-  transform: translateX(4px);
-}
-
-.public-card-marker {
-  width: 8px;
-  height: 8px;
-  background: var(--c-red);
-  flex-shrink: 0;
-}
-
-.public-card-text {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
-  color: var(--c-white);
-  line-height: 1.2;
-}
 
 /* -------------------------------------------------------
    18. SEÇÃO — CONTATO & CONVERSÃO (#contato)
@@ -1964,32 +1584,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .consulting-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #steps-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  #steps-list::before {
-    display: none;
-  }
-
-  .step-item {
-    border-bottom: 1px solid var(--c-dark-3);
-  }
-
-  .fabricantes-grid {
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
-
-  .mro-intro-grid {
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-  }
-
   .diff-layout {
     grid-template-columns: 1fr;
     gap: var(--sp-10);
@@ -2075,13 +1669,7 @@ footer {
 
   .about,
   .solutions-industry,
-  .consulting-section,
-  .how-it-works,
-  .pericias-section,
-  .fabricantes-section,
-  .mro-section,
   .differentials,
-  .public-section,
   .contact {
     padding: var(--sp-16) 0;
   }
@@ -2098,14 +1686,6 @@ footer {
 
   .about-profile-panel {
     padding: var(--sp-6);
-  }
-
-  #steps-list {
-    grid-template-columns: 1fr;
-  }
-
-  .step-item {
-    border-right: none;
   }
 
   .diff-item {
@@ -2165,13 +1745,7 @@ nav,
 .hero-content,
 .about,
 .solutions-industry,
-.consulting-section,
-.how-it-works,
-.pericias-section,
-.fabricantes-section,
-.mro-section,
 .differentials,
-.public-section,
 .contact {
   max-width: 100%;
   overflow-x: hidden;
